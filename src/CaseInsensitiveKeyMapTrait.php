@@ -10,8 +10,6 @@
  */
 namespace NoreSources\Http;
 
-use Psr\Container\ContainerInterface;
-use NoreSources\ArrayRepresentation;
 use NoreSources\Container;
 
 /**
@@ -24,14 +22,13 @@ use NoreSources\Container;
 trait CaseInsensitiveKeyMapTrait
 {
 
+	/**
+	 *
+	 * @param array $array
+	 */
 	public function __construct($array = array())
 	{
-		$this->map = new \ArrayObject();
-		if (Container::isTraversable($array))
-			foreach ($array as $name => $value)
-			{
-				$this->offsetSet($name, $value);
-			}
+		$this->initializeCaseInsensitiveKeyMapTrait($array);
 	}
 
 	/**
@@ -147,6 +144,17 @@ trait CaseInsensitiveKeyMapTrait
 	public function has($name)
 	{
 		return $this->offsetExists($name);
+	}
+
+	protected function initializeCaseInsensitiveKeyMapTrait(
+		$array = array())
+	{
+		$this->map = new \ArrayObject();
+		if (Container::isTraversable($array))
+			foreach ($array as $name => $value)
+			{
+				$this->offsetSet($name, $value);
+			}
 	}
 
 	private $map;

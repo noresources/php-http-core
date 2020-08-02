@@ -39,12 +39,24 @@ class RFC7230
 	const OWS_PATTERN = '[\t ]*';
 
 	/**
+	 * Bad whitespace
+	 *
+	 * @var string
+	 */
+	const BWS_PATTERN = self::OWS_PATTERN;
+
+	/**
 	 * Visible characters
 	 *
 	 * @var string
 	 */
 	const VCHAR_RANGE = '\x21-\x7E';
 
+	/**
+	 * Set of characters authorized in tokens
+	 *
+	 * @var string
+	 */
 	const TOKEN_CHAR_RANGE = 'A-Za-z0-9!#$%\'*+.^_`|~\x2D';
 
 	/**

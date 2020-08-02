@@ -42,6 +42,53 @@ class ParameterMapSerializer
 			});
 	}
 
+	const OPTION_DELIMITER = 'delimiter';
+
+	/**
+	 * ParameterMap unserialization option.
+	 *
+	 * A PCRE pattern that MUST contains at least a group for parameter named
+	 * and a group for the value.
+	 *
+	 * Name and value groups are defined by the
+	 * OPTION_NAME_PATTERN_GROUPS and OPTION_VALUE_PATTERN_GROUPS
+	 */
+	const OPTION_PATTERN = 'pattern';
+
+	const OPTION_NAME_PATTERN_GROUPS = 'name-patterngroups';
+
+	/**
+	 * ParameterMap unserialization option.
+	 *
+	 * Array of pattern group indexes where the parameter value
+	 * could be.
+	 *
+	 * If the array entry is a {int, callable} pair, the callable will be applied on the
+	 * pattern group value.
+	 */
+	const OPTION_VALUE_PATTERN_GROUPS = 'value-patterngroups';
+
+	/**
+	 * ParameterMap unserialization option.
+	 *
+	 * Whitespace pattern
+	 */
+	const OPTION_WHITESPACE_PATTERN = 'whitespace';
+
+	/**
+	 * ParameterMap unserialization option.
+	 *
+	 * A callback invoked each time a parameter and its value is found .in @c $text
+	 * The callable should accept 2 arguments (name, value) and return an integer as
+	 * follow
+	 * <ul>
+	 * <li>&gt 1 if the parameter is accepted</li>
+	 * <li>0 if the marameter should be ignored</li>
+	 * <li>&lt 0 if the parsing must be aborted</li>
+	 * </ul>
+	 */
+	const OPTION_ACCEPT_CALLBACK = 'accept';
+
 	/**
 	 * Parameter map unserialization acceptance function result.
 	 *
@@ -74,33 +121,69 @@ class ParameterMapSerializer
 	 *
 	 * @param \ArrayAccess|array $parameters
 	 * @param string $text
-	 * @param \Closure $acceptCallable
-	 *        	A callback invoked each time a parameter and its value is found .in @c $text
-	 *        	The callable should accept 2 arguments (name, value) and return an integer as
-	 *        	follow
-	 *        	<ul>
-	 *        	<li>&gt 1 if the parameter is accepted</li>
-	 *        	<li>0 if the marameter should be ignored</li>
-	 *        	<li>&lt 0 if the parsing must be aborted</li>
-	 *        	</ul>
+	 * @param array $options
+	 *
 	 * @return integer number of bytes of $text consumed
 	 */
-	public static function unserializeParameters(&$parameters, $text, $acceptCallable = null)
+	public static function unserializeParameters(&$parameters, $text, $options = array())
 	{
+		if (\is_callable($options)) // Legacy compat
+		{
+			$options = [
+				self::OPTION_ACCEPT_CALLBACK => $options
+			];
+		}
+
+		$ws = Container::keyValue($options, self::OPTION_WHITESPACE_PATTERN, RFC7230::OWS_PATTERN);
+		$delimiter = Container::keyValue($options, self::OPTION_DELIMITER, ';');
+		$pattern = Container::keyValue($options, self::OPTION_PATTERN, RFC7230::PARAMETER_PATTERN);
+		$namePatternGroups = Container::keyValue($options, self::OPTION_NAME_PATTERN_GROUPS, 1);
+		$valuePatternGroups = Container::keyValue($options, self::OPTION_VALUE_PATTERN_GROUPS,
+			[
+				3 => '\stripslashes',
+				2
+			]);
+		$acceptCallable = Container::keyValue($options, self::OPTION_ACCEPT_CALLBACK);
+
+		if (!\is_array($namePatternGroups))
+			$namePatternGroups = [
+				$namePatternGroups
+			];
+		if (!\is_array($valuePatternGroups))
+			$valuePatternGroups = [
+				$valuePatternGroups
+			];
+
 		$consumed = 0;
 		$length = \strlen($text);
 
-		while ($length &&
-			\preg_match(
-				chr(1) . '^' . RFC7230::OWS_PATTERN . RFC7230::PARAMETER_PATTERN .
-				RFC7230::OWS_PATTERN . chr(1), $text, $groups))
+		while ($length && \preg_match(chr(1) . '^' . $ws . $pattern . $ws . chr(1), $text, $groups))
 		{
 			$c = \strlen($groups[0]);
-			$name = $groups[1];
-			if (Container::keyExists($groups, 3))
-				$value = \stripslashes(Container::keyValue($groups, 3));
-			else
-				$value = Container::keyValue($groups, 2, '');
+			$name = '';
+			$value = '';
+
+			foreach ($namePatternGroups as $g)
+			{
+				if (Container::keyExists($groups, $g) && ($v = $groups[$g]) && \strlen($v))
+				{
+					$name = $v;
+					break;
+				}
+			}
+
+			foreach ($valuePatternGroups as $g => $process)
+			{
+				if (!\is_callable($process))
+					$g = $process;
+				if (Container::keyExists($groups, $g) && ($v = $groups[$g]) && \strlen($v))
+				{
+					$value = $v;
+					if (\is_callable($process))
+						$value = \call_user_func($process, $value);
+					break;
+				}
+			}
 
 			$accepted = 1;
 			if (\is_callable($acceptCallable))
@@ -117,7 +200,7 @@ class ParameterMapSerializer
 			$text = \substr($text, $c);
 			$consumed += $c;
 
-			if (\substr($text, 0, 1) != ';')
+			if (\substr($text, 0, 1) != $delimiter)
 				break;
 
 			$consumed++;
