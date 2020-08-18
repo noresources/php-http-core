@@ -1,5 +1,5 @@
 {
-	"name": "noresources/ns-php-http-core",
+	"name": "noresources\/ns-php-http-core",
 	"description": "HTTP core",
 	"type": "library",
 	"license": "MIT",
@@ -17,19 +17,19 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"NoreSources\\Http\\": "src/"
+			"NoreSources\\Http\\": "src\/"
 		}
 	},
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.6",
-		"noresources/ns-php-core": "~2.2-dev"
+		"noresources\/ns-php-core": "~2.2"
 	},
 	"scripts": {
-		"tests": "@php  ./vendor/bin/phpunit --color=never --bootstrap vendor/autoload.php tests"
+		"tests": "@php  .\/vendor\/bin\/phpunit --color=never --bootstrap vendor\/autoload.php tests"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~8.0"
+		"phpunit\/phpunit": "~8.0"
 	},
 	"extra": {
 		"branch-alias": {
