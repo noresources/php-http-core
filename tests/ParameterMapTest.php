@@ -52,7 +52,8 @@ final class ParameterMapTest extends \PHPUnit\Framework\TestCase
 		$m = new ParameterMap($caseSensitive);
 
 		$this->assertCount(2, $m, 'count');
-		$this->assertEquals($caseSensitive, $m->getArrayCopy(), 'Keep case internally');
+		$this->assertEquals($caseSensitive, $m->getArrayCopy(),
+			'Keep case internally');
 
 		$this->assertTrue($m->has('key'), 'has / offsetExists');
 		$this->assertTrue($m->has('Foo'), 'has / offsetExists');
@@ -60,7 +61,8 @@ final class ParameterMapTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals('value', $m->get('key'), 'get (strict case)');
 		$this->assertEquals('Bar', $m->get('foo'), 'get (lowercase)');
-		$this->assertEquals('Bar', $m->offsetGet('foo'), 'offsetGet (lowercase)');
+		$this->assertEquals('Bar', $m->offsetGet('foo'),
+			'offsetGet (lowercase)');
 		$this->assertEquals('Bar', $m['foo'], 'operator [] (lowercase)');
 
 		$m['CaSe'] = 'Insensitive';

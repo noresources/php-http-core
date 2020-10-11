@@ -13,6 +13,7 @@ namespace NoreSources\Http;
 use Psr\Container\ContainerInterface;
 use NoreSources\ArrayRepresentation;
 use NoreSources\Container;
+use NoreSources\CaseInsensitiveKeyMapTrait;
 
 /**
  * Case-insensitive key-value parameter map.
@@ -26,4 +27,9 @@ class ParameterMap implements ParameterMapInterface, ContainerInterface
 {
 
 	use CaseInsensitiveKeyMapTrait;
+
+	protected function onKeyNotFound($key)
+	{
+		throw new ParameterNotFoundException($key);
+	}
 }

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/noresources/ns-php-core.git",
-                "reference": "6428e73d892952acf43ed5e63cfdf1980f2795cd"
+                "reference": "b80188b78a849e7155b19d3288a134d5f6f0798f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/noresources/ns-php-core/zipball/6428e73d892952acf43ed5e63cfdf1980f2795cd",
-                "reference": "6428e73d892952acf43ed5e63cfdf1980f2795cd",
+                "url": "https://api.github.com/repos/noresources/ns-php-core/zipball/b80188b78a849e7155b19d3288a134d5f6f0798f",
+                "reference": "b80188b78a849e7155b19d3288a134d5f6f0798f",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
             "keywords": [
                 "utility"
             ],
-            "time": "2020-10-08T22:06:51+00:00"
+            "time": "2020-10-19T21:37:47+00:00"
         },
         {
             "name": "psr/container",
@@ -71,21 +71,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "b1fbdff230c2fae8b3e600ead18e711563f05a04"
+                "reference": "381524e8568e07f31d504a945b88556548c8c42e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/b1fbdff230c2fae8b3e600ead18e711563f05a04",
-                "reference": "b1fbdff230c2fae8b3e600ead18e711563f05a04",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/381524e8568e07f31d504a945b88556548c8c42e",
+                "reference": "381524e8568e07f31d504a945b88556548c8c42e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -112,7 +112,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2020-09-18T06:44:01+00:00"
+            "time": "2020-10-13T07:07:53+00:00"
         },
         {
             "name": "psr/log",
@@ -472,30 +472,29 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "dev-master",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "94f3ddc5d77e49daadadd33b798b933e52dde82c"
+                "reference": "6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/94f3ddc5d77e49daadadd33b798b933e52dde82c",
-                "reference": "94f3ddc5d77e49daadadd33b798b933e52dde82c",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0",
+                "reference": "6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
+                "php": "^7.2 || ^8.0",
                 "phpdocumentor/reflection-common": "^2.0"
             },
             "require-dev": {
-                "ext-tokenizer": "^7.2",
-                "mockery/mockery": "~1"
+                "ext-tokenizer": "*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-1.x": "1.x-dev"
                 }
             },
             "autoload": {
@@ -514,7 +513,7 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "time": "2020-06-19T19:40:27+00:00"
+            "time": "2020-09-17T18:55:26+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -838,12 +837,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "684ef7b7ef6ba3c289113dba7fef53d1ba7d8cda"
+                "reference": "e2ac24d0c9f3815ca2227eec9b2c0cee22dcad44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/684ef7b7ef6ba3c289113dba7fef53d1ba7d8cda",
-                "reference": "684ef7b7ef6ba3c289113dba7fef53d1ba7d8cda",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e2ac24d0c9f3815ca2227eec9b2c0cee22dcad44",
+                "reference": "e2ac24d0c9f3815ca2227eec9b2c0cee22dcad44",
                 "shasum": ""
             },
             "require": {
@@ -913,7 +912,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2020-09-28T04:52:07+00:00"
+            "time": "2020-10-15T05:19:09+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
