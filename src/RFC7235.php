@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2012 - 2020 by Renaud Guillard (dev@nore.fr)
+ * Copyright © 2012 - 2021 by Renaud Guillard (dev@nore.fr)
  * Distributed under the terms of the MIT License, see LICENSE
  */
 
@@ -40,11 +40,13 @@ class RFC7235
 	 *
 	 * @var string
 	 */
-	const AUTH_PARAM_PATTERN = '(' . RFC7230::TOKEN_PATTERN . ')' . RFC7230::BWS_PATTERN . '=' .
-		RFC7230::BWS_PATTERN . self::AUTH_PARAM_VALUE_PATTERN;
+	const AUTH_PARAM_PATTERN = '(' . RFC7230::TOKEN_PATTERN . ')' .
+		RFC7230::BWS_PATTERN . '=' . RFC7230::BWS_PATTERN .
+		self::AUTH_PARAM_VALUE_PATTERN;
 
-	const AUTH_PARAM_LIST_PATTERN = self::AUTH_PARAM_PATTERN . '(?:' . RFC7230::BWS_PATTERN . ',' .
-		RFC7230::BWS_PATTERN . self::AUTH_PARAM_PATTERN . ')*';
+	const AUTH_PARAM_LIST_PATTERN = self::AUTH_PARAM_PATTERN . '(?:' .
+		RFC7230::BWS_PATTERN . ',' . RFC7230::BWS_PATTERN .
+		self::AUTH_PARAM_PATTERN . ')*';
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2012 - 2020 by Renaud Guillard (dev@nore.fr)
+ * Copyright © 2012 - 2021 by Renaud Guillard (dev@nore.fr)
  * Distributed under the terms of the MIT License, see LICENSE
  */
 
@@ -10,7 +10,7 @@
  */
 namespace NoreSources\Http;
 
-use NoreSources\Container;
+use NoreSources\Container\Container;
 
 final class ParameterMapSerializerTest extends \PHPUnit\Framework\TestCase
 {
@@ -78,16 +78,21 @@ final class ParameterMapSerializerTest extends \PHPUnit\Framework\TestCase
 		{
 			$text = $test['text'];
 			$expected = $test['expected'];
-			$consumed = Container::keyValue($test, 'consumed', \strlen($text));
+			$consumed = Container::keyValue($test, 'consumed',
+				\strlen($text));
 			$serialized = Container::keyValue($test, 'serialized', $text);
 
 			$parameters = [];
-			$c = ParameterMapSerializer::unserializeParameters($parameters, $text);
+			$c = ParameterMapSerializer::unserializeParameters(
+				$parameters, $text);
 
-			$this->assertEquals($expected, $parameters, $label . ' parsed values');
-			$this->assertEquals($consumed, $c, $label . ' consumed bytes');
+			$this->assertEquals($expected, $parameters,
+				$label . ' parsed values');
+			$this->assertEquals($consumed, $c,
+				$label . ' consumed bytes');
 
-			$s = ParameterMapSerializer::serializeParameters($parameters);
+			$s = ParameterMapSerializer::serializeParameters(
+				$parameters);
 			$this->assertEquals($serialized, $s, $label . ' serialized');
 		}
 	}

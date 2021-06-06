@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2012 - 2020 by Renaud Guillard (dev@nore.fr)
+ * Copyright © 2012 - 2021 by Renaud Guillard (dev@nore.fr)
  * Distributed under the terms of the MIT License, see LICENSE
  */
 
@@ -87,7 +87,8 @@ class RFC7230
 	 *
 	 * @var string
 	 */
-	const QUOTED_PAIR_PATTERN = '\x5C[\x09\x20' . self::VCHAR_RANGE . self::OBS_TEXT_RANGE . ']';
+	const QUOTED_PAIR_PATTERN = '\x5C[\x09\x20' . self::VCHAR_RANGE .
+		self::OBS_TEXT_RANGE . ']';
 
 	/**
 	 *
@@ -95,7 +96,8 @@ class RFC7230
 	 *
 	 * @var string
 	 */
-	const QUOTED_TEXT_RANGE = '\x09\x20\x21\x23-\x5B\x5D-\x7E' . self::OBS_TEXT_RANGE;
+	const QUOTED_TEXT_RANGE = '\x09\x20\x21\x23-\x5B\x5D-\x7E' .
+		self::OBS_TEXT_RANGE;
 
 	/**
 	 * Double quote
@@ -115,8 +117,9 @@ class RFC7230
 	 *
 	 * @see https://tools.ietf.org/html/rfc7230#section-3.2.6
 	 */
-	const QUOTED_STRING_PATTERN = self::DQUOTE . '((?:(?:' . self::QUOTED_PAIR_PATTERN . ')|(?:[' .
-		self::QUOTED_TEXT_RANGE . ']+))*)' . self::DQUOTE;
+	const QUOTED_STRING_PATTERN = self::DQUOTE . '((?:(?:' .
+		self::QUOTED_PAIR_PATTERN . ')|(?:[' . self::QUOTED_TEXT_RANGE .
+		']+))*)' . self::DQUOTE;
 
 	/**
 	 * Parameter value
@@ -128,8 +131,8 @@ class RFC7230
 	 *
 	 * @var string
 	 */
-	const PARAMETER_VALUE_PATTERN = '(?:(' . self::TOKEN_PATTERN . ')|' . self::QUOTED_STRING_PATTERN .
-		')';
+	const PARAMETER_VALUE_PATTERN = '(?:(' . self::TOKEN_PATTERN . ')|' .
+		self::QUOTED_STRING_PATTERN . ')';
 
 	/**
 	 * Parameter
@@ -138,7 +141,8 @@ class RFC7230
 	 *
 	 * @var unknown
 	 */
-	const PARAMETER_PATTERN = '(' . self::TOKEN_PATTERN . ')=' . self::PARAMETER_VALUE_PATTERN;
+	const PARAMETER_PATTERN = '(' . self::TOKEN_PATTERN . ')=' .
+		self::PARAMETER_VALUE_PATTERN;
 
 	/**
 	 * Http header field name pattern

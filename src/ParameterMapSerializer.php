@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2012 - 2020 by Renaud Guillard (dev@nore.fr)
+ * Copyright © 2012 - 2021 by Renaud Guillard (dev@nore.fr)
  * Distributed under the terms of the MIT License, see LICENSE
  */
 
@@ -10,7 +10,7 @@
  */
 namespace NoreSources\Http;
 
-use NoreSources\Container;
+use Noresources\Container\Container;
 
 class ParameterMapSerializer
 {
@@ -28,14 +28,17 @@ class ParameterMapSerializer
 		return Container::implode($parameters, $glue,
 			function ($name, $value) {
 				$s = $name . '=';
-				if (\preg_match(chr(1) . '^' . RFC7230::TOKEN_PATTERN . '$' . chr(1), $value))
+				if (\preg_match(
+					chr(1) . '^' . RFC7230::TOKEN_PATTERN . '$' . chr(1),
+					$value))
 					$s .= $value;
 				else
 				{
 					$replacement = '\\\\${1}';
 					$s .= '"' .
-					\preg_replace(chr(1) . '([^' . RFC7230::QUOTED_TEXT_RANGE . '])' . chr(1),
-						$replacement, $value) . '"';
+					\preg_replace(
+						chr(1) . '([^' . RFC7230::QUOTED_TEXT_RANGE .
+						'])' . chr(1), $replacement, $value) . '"';
 				}
 
 				return $s;
@@ -125,7 +128,8 @@ class ParameterMapSerializer
 	 *
 	 * @return integer number of bytes of $text consumed
 	 */
-	public static function unserializeParameters(&$parameters, $text, $options = array())
+	public static function unserializeParameters(&$parameters, $text,
+		$options = array())
 	{
 		if (\is_callable($options)) // Legacy compat
 		{
@@ -134,16 +138,22 @@ class ParameterMapSerializer
 			];
 		}
 
-		$ws = Container::keyValue($options, self::OPTION_WHITESPACE_PATTERN, RFC7230::OWS_PATTERN);
-		$delimiter = Container::keyValue($options, self::OPTION_DELIMITER, ';');
-		$pattern = Container::keyValue($options, self::OPTION_PATTERN, RFC7230::PARAMETER_PATTERN);
-		$namePatternGroups = Container::keyValue($options, self::OPTION_NAME_PATTERN_GROUPS, 1);
-		$valuePatternGroups = Container::keyValue($options, self::OPTION_VALUE_PATTERN_GROUPS,
+		$ws = Container::keyValue($options,
+			self::OPTION_WHITESPACE_PATTERN, RFC7230::OWS_PATTERN);
+		$delimiter = Container::keyValue($options,
+			self::OPTION_DELIMITER, ';');
+		$pattern = Container::keyValue($options, self::OPTION_PATTERN,
+			RFC7230::PARAMETER_PATTERN);
+		$namePatternGroups = Container::keyValue($options,
+			self::OPTION_NAME_PATTERN_GROUPS, 1);
+		$valuePatternGroups = Container::keyValue($options,
+			self::OPTION_VALUE_PATTERN_GROUPS,
 			[
 				3 => '\stripslashes',
 				2
 			]);
-		$acceptCallable = Container::keyValue($options, self::OPTION_ACCEPT_CALLBACK);
+		$acceptCallable = Container::keyValue($options,
+			self::OPTION_ACCEPT_CALLBACK);
 
 		if (!\is_array($namePatternGroups))
 			$namePatternGroups = [
@@ -157,7 +167,9 @@ class ParameterMapSerializer
 		$consumed = 0;
 		$length = \strlen($text);
 
-		while ($length && \preg_match(chr(1) . '^' . $ws . $pattern . $ws . chr(1), $text, $groups))
+		while ($length &&
+			\preg_match(chr(1) . '^' . $ws . $pattern . $ws . chr(1),
+				$text, $groups))
 		{
 			$c = \strlen($groups[0]);
 			$name = '';
@@ -165,7 +177,8 @@ class ParameterMapSerializer
 
 			foreach ($namePatternGroups as $g)
 			{
-				if (Container::keyExists($groups, $g) && ($v = $groups[$g]) && \strlen($v))
+				if (Container::keyExists($groups, $g) &&
+					($v = $groups[$g]) && \strlen($v))
 				{
 					$name = $v;
 					break;
@@ -176,7 +189,8 @@ class ParameterMapSerializer
 			{
 				if (!\is_callable($process))
 					$g = $process;
-				if (Container::keyExists($groups, $g) && ($v = $groups[$g]) && \strlen($v))
+				if (Container::keyExists($groups, $g) &&
+					($v = $groups[$g]) && \strlen($v))
 				{
 					$value = $v;
 					if (\is_callable($process))
@@ -188,7 +202,8 @@ class ParameterMapSerializer
 			$accepted = 1;
 			if (\is_callable($acceptCallable))
 			{
-				$accepted = \call_user_func($acceptCallable, $name, $value);
+				$accepted = \call_user_func($acceptCallable, $name,
+					$value);
 				if ($accepted <= self::ABORT)
 					break;
 			}

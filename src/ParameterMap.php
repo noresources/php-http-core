@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2012 - 2020 by Renaud Guillard (dev@nore.fr)
+ * Copyright © 2012 - 2021 by Renaud Guillard (dev@nore.fr)
  * Distributed under the terms of the MIT License, see LICENSE
  */
 
@@ -11,9 +11,8 @@
 namespace NoreSources\Http;
 
 use Psr\Container\ContainerInterface;
-use NoreSources\ArrayRepresentation;
 use NoreSources\Container;
-use NoreSources\CaseInsensitiveKeyMapTrait;
+use NoreSources\Container\CaseInsensitiveKeyMapTrait;
 
 /**
  * Case-insensitive key-value parameter map.
