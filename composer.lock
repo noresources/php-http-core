@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65c7d71c6129ba3b72e4a9dde0a85175",
+    "content-hash": "ed23670877ba2a4ebadb454af1a6dc1b",
     "packages": [
         {
             "name": "noresources/ns-php-core",
-            "version": "dev-master",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/noresources/ns-php-core.git",
@@ -32,7 +32,6 @@
             "suggest": {
                 "ext-yaml": "Needed to load DataTree content from YAML encoded file"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -67,7 +66,7 @@
             ],
             "support": {
                 "issues": "https://github.com/noresources/ns-php-core/issues",
-                "source": "https://github.com/noresources/ns-php-core/tree/master"
+                "source": "https://github.com/noresources/ns-php-core/tree/v2.3.0"
             },
             "time": "2021-06-30T18:16:46+00:00"
         },

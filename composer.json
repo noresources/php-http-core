@@ -23,7 +23,7 @@
 	"minimum-stability": "dev", 
 	"require": {
 		"php": ">=5.6", 
-		"noresources/ns-php-core": "~2.3.0"
+		"noresources/ns-php-core": "<2.3.1"
 	}, 
 	"scripts": {
 		"tests": "@php  ./vendor/bin/phpunit --color=never --bootstrap vendor/autoload.php tests"
