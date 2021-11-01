@@ -22,7 +22,7 @@
 	}, 
 	"require": {
 		"php": ">=5.6", 
-		"noresources/ns-php-core": "~2.4.0"
+		"noresources/ns-php-core": "^2.4"
 	}, 
 	"scripts": {
 		"tests": "@php  ./vendor/bin/phpunit --color=never --bootstrap vendor/autoload.php tests"
