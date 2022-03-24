@@ -27,7 +27,7 @@ class RFC7235
 	 *
 	 * @var string
 	 */
-	const TOKEN68_PATTERN = '[a-zA-Z0-9. ~+/-]+=*';
+	const TOKEN68_PATTERN = '[a-zA-Z0-9._~+/-]+=*';
 
 	const AUTH_SCHEME_PATTERN = RFC7230::TOKEN_PATTERN;
 
