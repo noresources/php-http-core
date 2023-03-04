@@ -10,7 +10,7 @@
  */
 namespace NoreSources\Http;
 
-use Noresources\Container\Container;
+use NoreSources\Container\Container;
 
 class ParameterMapSerializer
 {
