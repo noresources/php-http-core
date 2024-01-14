@@ -30,6 +30,12 @@ class ParameterMap implements ParameterMapInterface
 	use CaseInsensitiveKeyMapTrait;
 	use ArrayAccessContainerInterfaceTrait;
 
+	/**
+	 *
+	 * {@inheritdoc}
+	 * @see ArrayAccess::offsetGet()
+	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet($name)
 	{
 		if (!$this->offsetExists($name))
@@ -37,6 +43,12 @@ class ParameterMap implements ParameterMapInterface
 		return $this->caselessOffsetGet($name);
 	}
 
+	/**
+	 *
+	 * {@inheritdoc}
+	 * @see ArrayAccess::offsetSet()
+	 */
+	#[\ReturnTypeWillChange]
 	public function offsetSet($name, $value)
 	{
 		if (!\is_string($name))
