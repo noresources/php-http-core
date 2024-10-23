@@ -1,5 +1,5 @@
 {
-	"name": "noresources/ns-php-http-core", 
+	"name": "noresources/http-core", 
 	"description": "HTTP core", 
 	"type": "library", 
 	"license": "MIT", 
@@ -21,8 +21,8 @@
 		}
 	}, 
 	"require": {
-		"php": ">=5.6", 
-		"noresources/ns-php-core": "^2.4"
+		"php": ">= 7.1", 
+		"noresources/core": "^3.0"
 	}, 
 	"scripts": {
 		"test": "@php  ./vendor/bin/phpunit --color=never --bootstrap vendor/autoload.php tests"
@@ -33,7 +33,14 @@
 	"extra": {
 		"branch-alias": {
 			"dev-1.0.x": "1.0.x-dev", 
-			"dev-master": "1.2.x-dev" 
+			"dev-1.2.x": "1.2.x-dev", 
+			"dev-main": "2.0.x-dev"
 		}
+	}, 
+	"replace": {
+		"noresources/ns-php-http-core": "2.0.0"
+	}, 
+	"support": {
+		"issues": "https://github.com/noresources/php-http-core/issues"
 	}
 }

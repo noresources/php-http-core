@@ -59,6 +59,12 @@ final class ParameterMapSerializerTest extends \PHPUnit\Framework\TestCase
 					'key' => 'Some value'
 				]
 			],
+			'quoted-value-empty' => [
+				'text' => 'key=""',
+				'expected' => [
+					'key' => ''
+				]
+			],
 			'quoted-value with quoted pair' => [
 				'text' => 'key="A \"quoted\" text"',
 				'expected' => [

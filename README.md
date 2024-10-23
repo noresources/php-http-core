@@ -1,9 +1,9 @@
-ns-php-http-core
+noresources/http-core
 ===========
 Core classes & constants for HTTP
 
 ## Installation
 
 ```bash
-composer require noresources/ns-php-http-core 
+composer require noresources/http-core
 ```
